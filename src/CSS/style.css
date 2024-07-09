@@ -2,12 +2,8 @@
 *{
     margin: 0;
     padding:0;
+    /* height: 100vh; */
     /* width: 100%; */
-    
-}
-.appDiv{
-/* height: 100vh; */
-/* width: 100%;  */
     
 }
 
@@ -131,9 +127,134 @@
         /* padding: 0px; */
         /* text-align: center; */
         /* height: 100%; */
-        background: #7E88BA;
+        /* background:#282828; */
+    background: #212121;
+    /* background: #415259; */
+
 
 }
+.nav-bar{
+    position:sticky;
+}
+
+.nav-container{
+    display: flex;
+    justify-content:first baseline;
+}
+
+.navbar{
+    background-color: #2adb94;
+    color: black;
+    font-size: larger;
+    font-weight: 700;
+}
+
+.logout-btn{
+    /* font-size:large; */
+     font-weight: 700;
+}
+.dashboard-container{
+    background-color: #212121;
+    color: white;
+    /* height: 100vh; */
+    /* padding-top: 60px; */
+    /* margin-top: 60px; */
+
+}
+
+.file-btn{
+    width: 150px;
+}
+.brands,.sellers{
+    width: 250px;
+    margin:30px 30px 30px 50px;
+    background-color:#212121;
+    border-radius: 10px;
+    padding-bottom: 10px;
+
+    /* height: 10px; */
+    /* scrollbar-width: 10px;
+    scrollbar-color: white; */
+}
+
+.rangeContainer{
+    width: 330px;
+    padding: 7px 0px;
+    margin: 30px 11px;
+    background-color: #212121;
+    border-radius: 10px;
+}
+.range{
+    width: 320px;
+    justify-content: space-between;
+    display: flex;
+}
+
+.rangeDiv{
+    font-size:large;
+    width: 75px;
+    text-align: center;
+}
+.outOfStock{
+    padding: '5px';
+    margin: 0;
+    font-weight: 700;
+    color:red
+}
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+    border: solid 2px rgb(61, 61, 61);
+    padding: 0px 10px;
+    border-radius: 6px;
+    margin: 0px 0px 0px 20px;
+    height: 40px;
+}
+
+
+.dropdown-menu {
+    display: block;
+    position: absolute;
+    right: 0;
+        /* Align to the right edge of the parent */
+     /* top: 100%; */
+        /* Place below the button */
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* z-index: 1; */
+    list-style: none;
+    padding: 0px 20px;
+    margin:  0;
+    margin-top: 15px;
+}
+
+.dropdown-menu li {
+    padding: 8px 6px;
+}
+
+/* Add this CSS to your stylesheet */
+
+.sticky-container {
+    position: -webkit-sticky;
+    /* For Safari */
+    position: sticky;
+    top: 0;
+    /* Adjust as needed */
+    max-height: 100vh;
+    /* Adjust as needed */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+}
+
+/* .dropdown-menu li:hover {
+    background-color: #ddd;
+} */
+
+
+
+
 
 
 
@@ -214,7 +335,7 @@
         /* margin-right: 5px; */
         /* text-align: center; */
         height: 50%;
-        background: #7E88BA;
+       
        }
 
     

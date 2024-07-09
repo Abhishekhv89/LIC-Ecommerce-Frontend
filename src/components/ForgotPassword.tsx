@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -114,18 +114,9 @@ let flage = true;
 
 
 
-const handleSubmit = (event:any) => {
-    const form = event.currentTarget;
+const handleSubmit = (event:FormEvent) => {
+    const form = event.currentTarget as HTMLFormElement;
      event.preventDefault();
-
-
-
-
-
-
-    
-
-
     if (form.checkValidity() === false) {
      
       event.stopPropagation();
@@ -134,24 +125,17 @@ const handleSubmit = (event:any) => {
        
         otpHandler();
     }
-    
-
-
-
+ 
  setValidated(true);
 
-
  
-
-
-    
     // alert(msg);
    
   };
 
   
 
-  const handleInputChange = (e:any, index:number) => {
+  const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>, index:number) => {
     const val = e.target.value;
     console.log(val, index);
     if (!Number(val) && val!='0')
@@ -165,9 +149,10 @@ const handleSubmit = (event:any) => {
     setInputs(copyInputs);
   }
 
-  const handleOnKeyDown = (e:any, index:number) => {
-    console.log(e.keyCode, index);
-    if (e.keyCode === 8) {
+  const handleOnKeyDown = (e:React.KeyboardEvent<HTMLInputElement>, index:number) => {
+    // const event = e.keyCode as 
+    console.log(e.key, index);
+    if (e.key === 'Backspace') {
       const copyInputs = [...inputs];
       copyInputs[index] = '';
       setInputs(copyInputs);
@@ -178,10 +163,10 @@ const handleSubmit = (event:any) => {
     }
   }
 
-  const handlePaste = (e:any) => {
-    const data = e.clipboardData.getData('text');
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const data = e.clipboardData?.getData('text');
     console.log('paste data ', data)
-    if (!Number(data) || data.length !== inputs.length)
+    if (!data||!Number(data) || data.length !== inputs.length)
       return;
 
     const pastCode = data.split('');
@@ -205,7 +190,7 @@ const handleSubmit = (event:any) => {
        
       >
         
-          <Form.Control className=""  required type="email"  placeholder="name@sample.com" onChange={e=>setEmail(e.target.value)}/>
+          <Form.Control className="" value={email} required type="email"  placeholder="name@sample.com" onChange={e=>setEmail(e.target.value)}/>
       
           
         <div className='emailChk'>
@@ -220,7 +205,7 @@ const handleSubmit = (event:any) => {
         label="Phone number"
         className="mb-3"
       >
-        <Form.Control   required type="number"  placeholder="" onChange={e=>setPhone(e.target.value)} />
+        <Form.Control   required type="number" value={phone} placeholder="" onChange={e=>setPhone(e.target.value)} />
         <div className='phone' ></div>
         <Form.Control.Feedback  type="invalid">
               Please provide phone number.

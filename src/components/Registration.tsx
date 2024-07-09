@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FloatingLabel } from 'react-bootstrap';
@@ -8,8 +8,9 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
-// import { redirect } from 'react-router-dom';
-
+import {toast} from 'react-hot-toast';
+import axios from 'axios';
+import { ChangeEvent } from 'react';
 
 
 
@@ -19,48 +20,75 @@ function Registration() {
 
    const [validated, setValidated] = useState(false);
 
-   const [name,setName] = useState('');
-   const [email,setEmail] = useState('');
-   const [password,setPassword] = useState('');
-   const [conPassword,setConPassword] = useState('');
+   const data ={
+    name:'',
+    email:'',
+    password:'',
+    phone:'',
+    conPassword:'',
+    address:''
+
+   }
+
+   
+   const [userData,setUserData] = useState(data);
+
    const [disable , setDisable] = useState(true);
    const [passchk,setPasschk] = useState(true);
-   const [phone,setPhone] = useState('');
-   const [address , setAddress] = useState('');
+  
    const [reset,setReset] = useState(false);
+   const [isLoading,setIsLoading] = useState(false);
 
    const navigate = useNavigate();
 
-  const handleSubmit = (event:any) => {
-    const form = event.currentTarget;
+  const handleSubmit = async(event:FormEvent) => {
+    const form = event.currentTarget as HTMLFormElement;
+    setIsLoading(true);
      event.preventDefault();
 
+     const { name,email,password,phone,conPassword,address} = userData
      
-     
-      let temp = false;
+      let isValid = false;
     if(conPassword!==password){
       event.stopPropagation();
      setPasschk(false);
-     temp = false;    
+     isValid = false;    
     }else{
         setPasschk(true);
-         temp = true;
+         isValid = true;
     }
 
 
     if (form.checkValidity() === false) {
-      
+          
       
       event.stopPropagation();
       
     
     }else{
 
-      console.log()
+      
 
-     if(temp){
-      navigate("/login");
+     if(isValid){
+     try{
+  
+      const {data} = await axios.post('http://localhost:3001/register',{name,email,password,address,phone});
+       
+       if(data.error){
+        toast.error(data.error);
+        setIsLoading(false);
+       }else{
+          //make all empty
+           setIsLoading(false);
+          toast.success('Registration was successfull.')
+          navigate("/login");
+       }
+     
+     }catch(err){
+      console.log(err);
      }
+     }
+      
     }
 
  setValidated(true);
@@ -73,19 +101,29 @@ function Registration() {
    
   };
 
-  useEffect(()=>{
+  const handelRest=()=>{
+    setUserData({ name:'',
+    email:'',
+    password:'',
+    phone:'',
+    conPassword:'',
+    address:''
+});
+  }
 
+  useEffect(()=>{
+ const { name,email,password,phone,conPassword,address} = userData
 
     if(name || email || password || conPassword || phone || address){
       
       setReset(true);
     }else{
-      console.log("reset")
+      
       setReset(false);
     }
      const email_pattren = /^[^\s@]+@[^\s@]+\.[^\s@]{2,6}/;
     let flage =true;
-    if(name && email && password && conPassword && phone && address){
+    if(name && email && password && conPassword && phone){
       let phoneChk = document.querySelector('.phone') as HTMLInputElement;
 
       if(phone.length !=10 ){
@@ -95,17 +133,17 @@ function Registration() {
         phoneChk.style.color = 'red';
 
         flage = true;
-        // setDisable(true);
+    
       }else{
         phoneChk.innerText = '';
         flage = false;
-        // setDisable(false);
+      
         
       }
             
     }else{
       flage = true;
-            // setDisable(true);
+ 
      }
 
      let emailChk = document.querySelector('.emailChk') as HTMLInputElement;
@@ -120,16 +158,9 @@ function Registration() {
       emailChk.innerText = '';
 
      }
-
-
      setDisable(flage);
 
-
-     
-
-
-
-  },[name,email,password,conPassword,address,phone])
+  },[{...userData}])
 
 
   
@@ -150,7 +181,11 @@ function Registration() {
         className='mb-3'
       
       >
-        <Form.Control   required type="text"  placeholder="name" onChange={e=>setName(e.target.value)} />
+        <Form.Control   required type="text"  placeholder="name" 
+        // onChange={e=>setName(e.target.value)} 
+        value={userData.name}
+        onChange={e=>setUserData({...userData,name:e.target.value})}
+         />
         <Form.Control.Feedback type="invalid">
               Please provide name.
          </Form.Control.Feedback>
@@ -163,7 +198,11 @@ function Registration() {
         label="Phone number"
         className="mb-3"
       >
-        <Form.Control   required type="number"  placeholder="" onChange={e=>setPhone(e.target.value)} />
+        <Form.Control   required type="number"  placeholder="" 
+        // onChange={e=>setPhone(e.target.value)} 
+        value={userData.phone}
+        onChange={e=>setUserData({...userData,phone:e.target.value})}
+        />
         <div className='phone' ></div>
         <Form.Control.Feedback  type="invalid">
               Please provide phone number.
@@ -181,9 +220,15 @@ function Registration() {
        
       >
         
-          <Form.Control className=""  required type="email"  placeholder="name@sample.com" onChange={e=>setEmail(e.target.value)}/>
+          <Form.Control className="" type="email" required placeholder="name@sample.com" 
+          // onChange={e=>setEmail(e.target.value)}
+          value={userData.email}
+          onChange={e=>setUserData({...userData,email:e.target.value})}
+          />
       
-      
+      <Form.Control.Feedback type="invalid">
+              Please provide email.
+         </Form.Control.Feedback>
         <div  className='emailChk'>
              
          </div>
@@ -201,7 +246,11 @@ function Registration() {
         label="Password"
         className="mb-3"
       >
-        <Form.Control   required type="password"  placeholder="" onChange={e=>setPassword(e.target.value)} />
+        <Form.Control   required type="password"  placeholder=""
+        //  onChange={e=>setPassword(e.target.value)}
+        value={userData.password}
+        onChange={e=>setUserData({...userData,password:e.target.value})}
+          />
         <Form.Control.Feedback type="invalid">
               Please provide password.
          </Form.Control.Feedback>
@@ -214,16 +263,19 @@ function Registration() {
         label="Confirm password"
         className="mb-3"
       >
-        <Form.Control   required type="password"  placeholder="" onChange={e=>setConPassword(e.target.value)} />
-        {passchk  || <Form.Control.Feedback type="invalid">
+        <Form.Control   required type="password"  placeholder="" 
+        // onChange={e=>setConPassword(e.target.value)}
+        value={userData.conPassword}
+        onChange={e=>setUserData({...userData,conPassword:e.target.value})}
+         />
+        {!passchk  || <Form.Control.Feedback type="invalid">
               Re-enter the password.
          </Form.Control.Feedback>}
         { !passchk && <div className='passwordCheck'>password and confirm password must match</div> } 
       </FloatingLabel>
 
 </Col>
-       
-
+      
 </Row>
 
       
@@ -234,14 +286,14 @@ function Registration() {
         label="Address"
         className="mb-3"
       >
-        <Form.Control  className="address" required as="textarea"  placeholder="" onChange={e=>setAddress(e.target.value)}  style={{ height: '60px', background:'rgb(242, 240, 238)'}}/>
-        <Form.Control.Feedback type="invalid">
-              Please provide password.
-         </Form.Control.Feedback>
+        <Form.Control  className="address"  as="textarea"  placeholder="" 
+        // onChange={e=>setAddress(e.target.value)} 
+        value={userData.address}
+        onChange={e=>setUserData({...userData,address:e.target.value})} 
+        style={{ height: '60px', background:'rgb(242, 240, 238)'}}/>
+        
       </FloatingLabel>
-      
-
-      
+        
       <Row>
         <Col >
          <div className="d-grid gap-2 ">
@@ -250,20 +302,13 @@ function Registration() {
         </Col>
         <Col >
         <div className="d-grid gap-2 ">
-      <Button className="resetButton" variant='danger' type="reset" size="lg" disabled ={!reset}>Reset</Button>
+      <Button className="resetButton" variant='danger' onClick={handelRest} size="lg" disabled ={!reset}>Reset</Button>
       </div>
         </Col>
-         
-      
-       
 
       </Row>
     
     </Form>
-
-
-
-
 
 </div>
 </div>
