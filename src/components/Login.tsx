@@ -170,11 +170,11 @@ let flage =true;
 
       <Row>
         <Col sm={5}>
-          <a href='/forgot-password'>Forgot Password?</a>
+          <a href='/forgot-password'><u>Forgot Password?</u></a>
         </Col>
           
         <Col sm={7}>
-          <p>Don't have an account? <a href='/register'>Register</a></p>
+          <p>Don't have an account? <a href='/register'><u>Register</u></a></p>
         </Col>
       </Row>
       

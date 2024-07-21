@@ -2,10 +2,8 @@ import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import React, { useRef } from 'react'
 import { FaSearch } from "react-icons/fa";
 import "../CSS/style.css"
+import {Props} from '../interfaces/searchInterface'
 
-interface Props{
-    onSearch:(searchText:string)=>void;
-}
 
 
 function SearchInput({onSearch}:Props) {

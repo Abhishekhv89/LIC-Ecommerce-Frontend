@@ -1,37 +1,48 @@
+import { createContext, useEffect, useReducer } from 'react';
+import React, { ReactNode } from 'react';
+interface Props {
+    children: ReactNode;
+}
+interface Action {
+    type: string;
+    payload?: any;
+}
 
-import { createContext,useState,useEffect,useReducer } from 'react'
 
 export const UserContext = createContext({});
-export const authReducer =(state:any,action:any)=>{
-    switch(action.type){
+
+export const authReducer = (state:any, action:Action) => {
+    switch (action.type) {
         case 'LOGIN':
-            return {user:action.payload}
+            return { user: action.payload };
         case 'LOGOUT':
-            return {user:null}
+            return { user: null };
         default:
-            return state
+            return state;
     }
-}
+};
 
-export const UserContextProvider  = ({children}:any)=> {
-    const [state,dispatch] = useReducer(authReducer,{
-        user:null
-    })
-    
-    useEffect(()=>{
-        const store =localStorage.getItem("user")
-        const user =store? JSON.parse(store):null;
-        if(user){
-            dispatch({type:'LOGIN',payload:user})
+const initialState = () => {
+    const store = localStorage.getItem("user");
+    return store ? { user: JSON.parse(store) } : { user: null };
+};
+
+
+export const UserContextProvider : React.FC<Props> =({ children }) => {
+    const [state, dispatch] = useReducer(authReducer, {}, initialState);
+
+    useEffect(() => {
+        const store = localStorage.getItem("user");
+        const user = store ? JSON.parse(store) : null;
+        if (user) {
+            dispatch({ type: 'LOGIN', payload: user });
         }
+    }, []);
+    // console.log("context ",state)
 
-    },[])
-    
-    // console.log("userCOntect text :",state)
-    
-  return(
-    <UserContext.Provider value={{...state,dispatch}}>
-        {children}
-    </UserContext.Provider>
-  )
-}
+    return (
+        <UserContext.Provider value={{ ...state, dispatch }}>
+            {children}
+        </UserContext.Provider>
+    );
+};

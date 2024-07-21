@@ -41,6 +41,8 @@ function Registration() {
 
    const navigate = useNavigate();
 
+
+
   const handleSubmit = async(event:FormEvent) => {
     const form = event.currentTarget as HTMLFormElement;
     setIsLoading(true);
@@ -100,6 +102,8 @@ function Registration() {
     
    
   };
+
+  
 
   const handelRest=()=>{
     setUserData({ name:'',

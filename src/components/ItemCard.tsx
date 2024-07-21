@@ -1,13 +1,11 @@
 import React from 'react'
-import {ParsedData} from './Navbar'
+
 import { Button, Card, CardBody, CardFooter, Center, Heading, Image, Stack, Text } from '@chakra-ui/react'
 import { relative } from 'path'
 import "../CSS/style.css"
 import { LiaRupeeSignSolid } from "react-icons/lia";
+import {Props} from '../interfaces/itemcardInterface'
 
-interface Props{
-    item:ParsedData
-}
 
 
 
@@ -42,8 +40,8 @@ function ItemCard({item}:Props) {
           <Text fontSize={{ lg: '18px', sm: '14px' }}>
             <b>Brand:</b> {item.brand}
           </Text>
-          <Text fontSize={{ lg: '18px', sm: '14px' }}>
-            <div className='d-flex'><b>Price:</b> <LiaRupeeSignSolid className='mt-1'/> {item.price}</div> 
+          <Text fontSize={{ lg: '18px', sm: '14px' }} className='d-flex'>
+          <b>Price:</b> <LiaRupeeSignSolid className='mt-1'/> {item.price}
           </Text>
           {item.quantity === 0 && (
             <Text
