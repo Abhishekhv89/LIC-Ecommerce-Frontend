@@ -14,7 +14,7 @@ function Range({range,onChangeRange}:Props) {
         onChange={(val) => onChangeRange(val)}
         // marginBottom={6}
         width={'152px'}
-        marginRight={'20px'}
+        margin={'0px 5px'}
     >
       <RangeSliderTrack >
         <RangeSliderFilledTrack bg='tomato' />

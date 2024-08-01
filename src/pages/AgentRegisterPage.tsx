@@ -1,6 +1,7 @@
 import Navigationbar from '../components/Navbar'
 import AgentRegistration from '../components/AgentRegister'
 import Breadcrumbs from '../components/Breadcrumbs';
+import "../CSS/style.css"
 
 
 function AgentRegisterPage() {
@@ -10,10 +11,12 @@ function AgentRegisterPage() {
     { name: 'Dashboard', path: '/dashboard', active: false },
     { name: 'Agent Registration', path: '/agentRegistration', active: true },
   ];
+  
 
+  
   return (
     <div>
-        <Navigationbar />
+        {/* <Navigationbar /> */}
         <div className="agentRegister">
           <div className="agent-breadcrumb">
           <Breadcrumbs crumbs={crumbs} />

@@ -1,6 +1,6 @@
 import React from 'react'
-import Login from '../components/Login'
-import "../CSS/style.css"
+// import Login from '../components/userComponent/Login'
+// import "../CSS/style.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import register from "../images/img-register.jpg"
 import Registration from '../components/Registration';

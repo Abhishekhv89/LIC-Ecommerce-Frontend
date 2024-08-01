@@ -1,5 +1,5 @@
 import React from 'react'
-import "../CSS/style.css"
+// import "../CSS/style.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import forgPass from "../images/img-forpass.webp"
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import Login from '../components/Login'
-import "../CSS/style.css"
+// import "../CSS/style.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import login from "../images/img-login.webp"
 

@@ -3,7 +3,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FloatingLabel } from 'react-bootstrap';
-import "../CSS/style.css"
+// import "../CSS/style.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

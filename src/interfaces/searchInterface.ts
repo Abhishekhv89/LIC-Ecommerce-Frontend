@@ -1,3 +1,5 @@
 export interface Props{
-    onSearch:(searchText:string)=>void;
+    onSearch:(e:React.ChangeEvent<HTMLInputElement>)=>void;
+    value:string;
+    placeholder:string;
 }

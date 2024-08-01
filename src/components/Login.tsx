@@ -3,7 +3,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FloatingLabel } from 'react-bootstrap';
-import "../CSS/style.css"
+// import "../CSS/style.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -29,7 +29,7 @@ function Login() {
 
    const navigate = useNavigate();
    const {dispatch}:any  = useAuthContext();
-   const {user}:any = useAuthContext();
+   const {error,isAuthenticated}:any = useAuthContext();
 
 
   const handleSubmit = async(event:FormEvent) => {
@@ -44,39 +44,54 @@ function Login() {
     }else{
 
       try{
+
         const {username,email,password} = userData;
+
+        //  const config = { headers: { "Content-Type": "application/json" } };
 
         const {data} = await axios.post('http://localhost:3001/login',{
         username,
         email,
         password
-      });
+      }
+    );
+
+
+      // console.log(data);
 
       if(data.error ){
         toast.error(data.error);
-        // console.log(data.error)
+        console.log(data.error)
         setIsLoading(false);
     
       }else
-      if(data.username){
+      if(data.userId){
         // make values empty
         setUserData({ username:'', email:'',password:''});
          //save the user to local storage
          localStorage.setItem("user",JSON.stringify(data));
-
-          dispatch({type:'LOGIN',payload:data});
-          navigate('/dashboard');
-
+          dispatch({type:'LOGIN_SUCCESS',payload:data});
+          //  console.log(data.status)
+          if(isAuthenticated){
+        document.cookie = `token=${data.token};path=/`;
+        navigate('/dashboard');
+          }
           
-    
+
       }
-      }catch(error){
-        console.log(error);
+      }catch(error:any ){
+        console.log("LOGIN_FAIL :",error);
+        dispatch({ type: "LOGIN_FAIL", payload: error.response.data.message });
       } 
       }
     setValidated(true);
   };
 
+  useEffect(()=>{
+    if(error){
+      toast.error(error);
+    }
+  },[error])
  
 
 
@@ -111,7 +126,7 @@ let flage =true;
   },[{...userData}])
 
 
-  
+
     
 
 

@@ -4,9 +4,10 @@ export interface ParsedData {
   name: string,
   brand: string,
   category: string,
-  size: number,
+  sizes: string[],
   quantity: number,
   price: number,
   seller: string,
-  img: string,
+  images: string[],
 }
+

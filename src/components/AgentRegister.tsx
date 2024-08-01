@@ -4,7 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-// import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "../CSS/style.css"
 
 
 function AgentRegistration() {
@@ -257,14 +258,11 @@ required
         </Col>
       </Form.Group>
     </Form>
-  </div>
-
-
-        
-
-   
-    
+  </div>  
   );
 }
 
 export default AgentRegistration
+
+
+

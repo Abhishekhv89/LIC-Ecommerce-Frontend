@@ -18,9 +18,9 @@ export const fetchTshirtImages = async (): Promise<void> => {
     //         item.img = images[i-images.length]; // Or handle accordingly if there are not enough images
     //       }
     //     });
-    // console.log(fileData);
+    console.log(images);
   } catch (error) {
     console.error('Error fetching T-shirt images:', error);
   }
 };
-    fetchTshirtImages();
+    // fetchTshirtImages();
