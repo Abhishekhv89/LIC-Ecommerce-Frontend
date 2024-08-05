@@ -1,7 +1,7 @@
 // App.tsx
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';

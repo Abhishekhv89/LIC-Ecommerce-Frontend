@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 import "bootstrap/dist/css/bootstrap.min.css"
-import "../CSS/style.css"
+import "../../CSS/style.css"
 
 
 function AgentRegistration() {

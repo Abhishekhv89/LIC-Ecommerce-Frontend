@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { ParsedData } from '../interfaces/ParsedDataInterface';
+// import { ParsedData } from '../../interfaces/ParsedDataInterface';
 import { Box, Button, Input, InputGroup, InputLeftElement, InputRightElement, IconButton ,Text} from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign, faXmark, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { CartItem } from '../interfaces/cartItemsInterface';
+import { useAuthContext } from '../../hooks/useAuthContext';
+// import { CartItem } from '../../interfaces/cartItemsInterface';
+// import ItemDeleteButton from './ItemDeleteButton';
+// import Quantity from './Quantity';
+import { useCart } from '../../context/CartContext';
 import ItemDeleteButton from './ItemDeleteButton';
 import Quantity from './Quantity';
-import { useCart } from '../context/CartContext';
 
 interface Props {
   

@@ -3,7 +3,7 @@ import { Button, Card, CardBody, CardFooter, Center, Heading, Image, Stack, Text
 import { relative } from 'path'
 
 // import { LiaRupeeSignSolid } from "react-icons/lia";
-import {Props} from '../interfaces/itemcardInterface'
+import {Props} from '../../interfaces/itemcardInterface'
 import { useNavigate } from 'react-router-dom';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -50,6 +50,7 @@ function ItemCard({item}:Props) {
           <Text fontSize={{ lg: '18px', sm: '14px' }} className='d-flex'>
           <b>Price:</b> <FontAwesomeIcon icon={faIndianRupeeSign} style={{height:"15px"}} className='mt-2 mx-1'/> {item.price}
           </Text>
+           {item.seller}
           {item.quantity === 0 && (
             <Text
               fontSize={{ lg: '22px', sm: '14px' }}

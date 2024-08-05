@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from 'react-router-dom';
-import Breadcrumbs from './Breadcrumbs';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 
 function Home() {

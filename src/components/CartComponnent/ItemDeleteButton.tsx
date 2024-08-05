@@ -1,9 +1,9 @@
 import { Button } from '@chakra-ui/react'
 import axios from 'axios';
 import React from 'react'
-import { useAuthContext } from '../hooks/useAuthContext';
-import { CartItem } from '../interfaces/cartItemsInterface';
-import { useCart } from '../context/CartContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { CartItem } from '../../interfaces/cartItemsInterface';
+import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 
 

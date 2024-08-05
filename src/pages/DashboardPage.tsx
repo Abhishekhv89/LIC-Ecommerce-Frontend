@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Dashboard from '../components/Dashboard'
+import Dashboard from '../components/ProductComponent/Dashboard'
 import Navigationbar from '../components/Navbar';
 import {ParsedData} from '../interfaces/ParsedDataInterface'
 import axios from 'axios';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Dropdown } from 'react-bootstrap';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useLogout } from '../hooks/useLogout';
@@ -18,19 +18,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../interfaces/userInterface';
 import { useCart } from '../context/CartContext';
+import DropdownBox from './DropdownBox';
 
 const Navigationbar: React.FC<Props> = ({ onFileUpload = () => { }, isFileUploaded }: Props) => {
   const { cartItems, addToCart, removeFromCart, clearCart } = useCart();
   const [isDisabled, setIsDisabled] = useState(true);
-  const { logout } = useLogout();
+ 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleLogout = () => {
-    logout();
-    setIsOpen(false);
-    // navigate('/login');
-  };
+  
 
   const [productData, setProductData] = useState<ParsedData[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -82,7 +79,7 @@ const Navigationbar: React.FC<Props> = ({ onFileUpload = () => { }, isFileUpload
     }
   };
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
+
   
   useEffect(()=>{
     setIsOpen(false);
@@ -154,7 +151,10 @@ const Navigationbar: React.FC<Props> = ({ onFileUpload = () => { }, isFileUpload
 
             <Button variant='outline-dark' className='cartButton' onClick={() => navigate('/checkout')}><FontAwesomeIcon icon={faCartShopping} /> {cartItems.length}</Button>
 
-            {user && <div className="user-dropdown">
+
+             <DropdownBox userDetail={userDetail} username={user.username}/>
+
+            {/* {user && <div className="user-dropdown">
               <button onClick={toggleDropdown} >
                 <div className="navbar-toggler-icon"></div>
               </button>
@@ -165,7 +165,7 @@ const Navigationbar: React.FC<Props> = ({ onFileUpload = () => { }, isFileUpload
                   {userDetail?.role == 'admin' && <li><Button size='sm' className='logout-btn mb-2' onClick={() => {setIsOpen(false); navigate('/user/admin') }}>Admin Page</Button></li>}
                 </ul>
               )}
-            </div>}
+            </div>} */}
           </Navbar.Collapse>
         </Container>
       </Navbar>

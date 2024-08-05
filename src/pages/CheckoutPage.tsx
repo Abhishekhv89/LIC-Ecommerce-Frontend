@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Checkout from '../components/Checkout'
+import Checkout from '../components/CartComponnent/Checkout'
 import { useAuthContext } from '../hooks/useAuthContext';
 import axios from 'axios';
 import { ParsedData } from '../interfaces/ParsedDataInterface';

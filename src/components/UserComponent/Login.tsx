@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { useAuthContext } from '../hooks/useAuthContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 function Login() {

@@ -1,5 +1,5 @@
 import Navigationbar from '../components/Navbar'
-import AgentRegistration from '../components/AgentRegister'
+import AgentRegistration from '../components/UserComponent/AgentRegister'
 import Breadcrumbs from '../components/Breadcrumbs';
 import "../CSS/style.css"
 

@@ -1,0 +1,51 @@
+/* Style for the dropdown container */
+.dropdown-container {
+    position: relative;
+        display: inline-block;
+        border: solid 2px rgb(61, 61, 61);
+        padding: 0px 10px;
+        border-radius: 6px;
+        margin: 0px 0px 0px 20px;
+        height: 40px;
+}
+
+/* Style for the toggle button */
+
+
+/* Style for the icon */
+.dropdown-icon {
+    color: #333;
+    /* Icon color */
+}
+
+/* Style for the dropdown menu */
+.dropdown-menu {
+    display: block;
+        position: absolute;
+        right: 10px;
+        /* Align to the right edge of the parent */
+        /* top: 100%; */
+        /* Place below the button */
+        z-index: 1000;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        /* z-index: 1; */
+        list-style: none;
+        padding: 0px 20px;
+        margin: 0;
+        margin-top: 15px;
+        max-width: 500px;
+}
+
+/* Style for dropdown items */
+.dropdown-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+

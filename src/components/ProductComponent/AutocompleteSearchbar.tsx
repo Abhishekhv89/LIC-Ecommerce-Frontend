@@ -1,13 +1,11 @@
-
 import React, { useState, useEffect } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import axios from 'axios';
-import { Filter } from '../interfaces/FilterInterface';
+import { Filter } from '../../interfaces/FilterInterface';
 
-// Define your theme
 const theme = createTheme({
   palette: {
     mode: 'dark',
@@ -31,7 +29,7 @@ const theme = createTheme({
 interface Props {
   placeholder: string;
   onSearch: (filters: Filter[]) => void;
-  initialFilters: Filter[]; // New prop to pass initial filter values from parent
+  initialFilters: Filter[];
 }
 
 function AutocompleteSearchbar({ placeholder, onSearch, initialFilters }: Props) {
@@ -42,14 +40,19 @@ function AutocompleteSearchbar({ placeholder, onSearch, initialFilters }: Props)
     const fetchFilters = async () => {
       try {
         const { data } = await axios.get("http://localhost:3001/getFilters", { withCredentials: true });
-        if (data.error) {
-          console.error("Error:", data.error);
-        }
         if (data.filters) {
-          setFilters(data.filters);
+          // Sort filters by group and title to ensure unique headers
+          const sortedFilters = data.filters.sort((a:Filter, b:Filter) => {
+            if (a.group < b.group) return -1;
+            if (a.group > b.group) return 1;
+            if (a.title < b.title) return -1;
+            if (a.title > b.title) return 1;
+            return 0;
+          });
+          setFilters(sortedFilters);
         }
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error fetching filters:", error);
       }
     };
     fetchFilters();
@@ -59,16 +62,9 @@ function AutocompleteSearchbar({ placeholder, onSearch, initialFilters }: Props)
     setSelectedValue(initialFilters);
   }, [initialFilters]);
 
-  // Filter out already selected values
-  const filteredOptions = filters.filter(
-    (option) => !selectedValue.some((selected) => selected.title === option.title)
-  );
-
-  const groupedOptions = filteredOptions.sort((a, b) => {
-    if (a.group < b.group) return -1;
-    if (a.group > b.group) return 1;
-    return 0;
-  });
+  const handleOptionEquality = (option: Filter, value: Filter) => {
+    return option.title === value.title && option.group === value.group;
+  };
 
   return (
     <div className="autocompleteSearchbar">
@@ -77,12 +73,14 @@ function AutocompleteSearchbar({ placeholder, onSearch, initialFilters }: Props)
         <Autocomplete
           multiple
           id="tags-outlined"
-          options={groupedOptions}
+          options={filters}
           groupBy={(option) => option.group}
           getOptionLabel={(option) => `${option.group}: ${option.title}`}
           filterSelectedOptions
           value={selectedValue}
+          isOptionEqualToValue={handleOptionEquality}
           onChange={(event, value) => {
+            console.log("Selected value:", value); // Log selected values for debugging
             setSelectedValue(value);
             onSearch(value);
           }}
@@ -101,4 +99,3 @@ function AutocompleteSearchbar({ placeholder, onSearch, initialFilters }: Props)
 }
 
 export default AutocompleteSearchbar;
-

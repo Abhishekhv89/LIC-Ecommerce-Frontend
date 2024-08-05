@@ -1,5 +1,5 @@
 import React from 'react'
-import { ParsedData } from '../interfaces/ParsedDataInterface'
+import { ParsedData } from '../../interfaces/ParsedDataInterface'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIndianRupeeSign,faHeart } from '@fortawesome/free-solid-svg-icons'
 import Size from './Size'

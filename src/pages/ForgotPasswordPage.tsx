@@ -3,7 +3,7 @@ import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
 import forgPass from "../images/img-forpass.webp"
 
-import ForgotPassword from '../components/ForgotPassword';
+import ForgotPassword from '../components/UserComponent/ForgotPassword';
 
 
 

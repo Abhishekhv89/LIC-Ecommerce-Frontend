@@ -5,7 +5,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { Button, Box, Table, Tbody, Tr, Td, Thead, Th, Spinner, Heading, Text, Alert, AlertIcon, Flex, Avatar, Stack } from '@chakra-ui/react';
 import { User } from '../interfaces/userInterface';
 import toast from 'react-hot-toast';
-import SearchInput from '../components/SearchInput';
+import SearchInput from '../components/UserComponent/SearchInput';
 import Navigationbar from '../components/Navbar';
 import Breadcrumbs from '../components/Breadcrumbs';
 // import { Breadcrumbs } from '@mui/material';

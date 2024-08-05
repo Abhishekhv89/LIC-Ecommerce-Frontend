@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 // import "../CSS/style.css"
-import { Props } from '../interfaces/searchInterface'
+import { Props } from '../../interfaces/searchInterface'
 
 function SearchInput({ onSearch,value,placeholder }: Props) {
     const ref = useRef<HTMLInputElement>(null);

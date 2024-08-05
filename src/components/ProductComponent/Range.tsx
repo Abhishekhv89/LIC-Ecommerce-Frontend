@@ -1,6 +1,6 @@
 import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack } from '@chakra-ui/react'
 import React from 'react'
-import {Props}from '../interfaces/RangeInterface'
+import {Props}from '../../interfaces/RangeInterface'
 
 function Range({range,onChangeRange}:Props) {
   // console.log(range);

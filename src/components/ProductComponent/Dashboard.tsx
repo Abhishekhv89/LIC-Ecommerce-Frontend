@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react';
-import { useAuthContext } from '../hooks/useAuthContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useLogout } from '../hooks/useLogout';
+import { useLogout } from '../../hooks/useLogout';
 import { Button, Center, Grid, GridItem, Show, SimpleGrid, Spinner, Text } from '@chakra-ui/react';
-import { ParsedData } from '../interfaces/ParsedDataInterface';
+import { ParsedData } from '../../interfaces/ParsedDataInterface';
 import ItemCard from './ItemCard';
 import BrandsDisplay from './MUltiCheckBox';
 import SellersDiplay from './MUltiCheckBox';
 // import "./style.css"
-import "../CSS/style.css"
+import "../../CSS/style.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons'
 import Range from './Range';
-import Breadcrumbs from './Breadcrumbs';
-import{Props} from '../interfaces/DashboardInterface'
-import { User } from '../interfaces/userInterface';
+import Breadcrumbs from '../Breadcrumbs';
+import{Props} from '../../interfaces/DashboardInterface'
+import { User } from '../../interfaces/userInterface';
 import AutocompleteSearchbar from './AutocompleteSearchbar';
-import { Filter } from '../interfaces/FilterInterface';
+import { Filter } from '../../interfaces/FilterInterface';
 
 axios.defaults.withCredentials = true;
 
@@ -82,47 +82,53 @@ const Dashboard = ({ isFileUploaded}: Props) => {
       setShouldApplyFilters(false);
     }
   }, [shouldApplyFilters]);
+
 const [searchInput,setSearchInput]= useState<Filter[]>([])
 
   const handleBrands = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const newArray :string[]= e.target.checked ? [...selectedBrands, value] : selectedBrands.filter(item => item !== value)
-    // console.log(newArray);
-    
-      const updatedBrands:Filter[] = newArray.map(item=>(
-      {title:item,group:"Brand"}
-      ))
+  const value = e.target.value;
+  const newSelectedBrands = e.target.checked 
+    ? [...selectedBrands, value] 
+    : selectedBrands.filter(item => item !== value);
 
-      setSearchInput(updatedBrands);
-    
-    
+  const updatedBrands: Filter[] = newSelectedBrands.map(item => ({
+    title: item,
+    group: "Brand"
+  }));
 
-    setSelectedBrands(prev =>
-      e.target.checked ? [...prev, value] : prev.filter(item => item !== value)
-    );
+  // Merge with existing search input without duplicating
+  const updatedSearchInput = [
+    ...searchInput.filter(item => item.group !== "Brand"),
+    ...updatedBrands
+  ];
 
-    setShouldApplyFilters(true);
-  };
+  setSearchInput([]);
+  setSelectedBrands(newSelectedBrands);
+  setShouldApplyFilters(true);
+};
 
-  const handleSellers = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+const handleSellers = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const value = e.target.value;
+  const newSelectedSellers = e.target.checked 
+    ? [...selectedSellers, value] 
+    : selectedSellers.filter(item => item !== value);
 
-    const newArray :string[]= e.target.checked ? [...selectedSellers, value] : selectedSellers.filter(item => item !== value)
-    // console.log(newArray);
-    
-      const updatedSellers:Filter[] = newArray.map(item=>(
-      {title:item,group:"Seller"}
-      ))
+  const updatedSellers: Filter[] = newSelectedSellers.map(item => ({
+    title: item,
+    group: "Seller"
+  }));
 
-      setSearchInput(updatedSellers);
+  // // Merge with existing search input without duplicating
+  // const updatedSearchInput = [
+  //   ...searchInput.filter(item => item.group !== "Seller"),
+  //   ...updatedSellers
+  // ];
 
+  setSearchInput([]);
+  setSelectedSellers(newSelectedSellers);
+  setShouldApplyFilters(true);
+};
 
-
-    setSelectedSellers(prev =>
-      e.target.checked ? [...prev, value] : prev.filter(item => item !== value)
-    );
-    setShouldApplyFilters(true);
-  };
 
   const handleRange = (val: number[]) => {
     setRange(val);
@@ -131,7 +137,7 @@ const [searchInput,setSearchInput]= useState<Filter[]>([])
   const applyFilters = async () => {
     setItemsToShow([]);
     setCurrentPage(1);
-    setItemDisplayCount(9);
+    // setItemDisplayCount(9);
     await loadMoreItems(1, selectedBrands, selectedSellers, range);
   }
 
@@ -177,14 +183,15 @@ const [searchInput,setSearchInput]= useState<Filter[]>([])
         }
       })
 
-      setSelectedBrands(brands);
-      setSelectedSellers(sellers)
+      setSelectedBrands([]);
+      setSelectedSellers([])
       await loadMoreItems(1, brands, sellers, range);
     } else {
       setSelectedBrands([]);
-      await loadMoreItems(1, [], selectedSellers, range);
+      await loadMoreItems(1, [], [], range);
     }
   };
+  
    const crumbs = [
     { name: 'Home', path: '/', active: false },
     { name: 'Dashboard', path: '/dashboard', active: true },

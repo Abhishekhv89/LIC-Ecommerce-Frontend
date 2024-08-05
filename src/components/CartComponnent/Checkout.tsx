@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CartItem } from '../interfaces/cartItemsInterface'
+import { CartItem } from '../../interfaces/cartItemsInterface'
 import { Box, Button, IconButton, Input, InputGroup, InputLeftElement, InputRightElement, Text } from '@chakra-ui/react'
 import { Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,9 +7,9 @@ import { faIndianRupeeSign, faMinus, faPlus } from '@fortawesome/free-solid-svg-
 import ItemDeleteButton from './ItemDeleteButton'
 import Quantity from './Quantity'
 import { updateClassDeclaration } from 'typescript'
-import { useCart } from '../context/CartContext'
+import { useCart } from '../../context/CartContext'
 import axios from 'axios'
-import { useAuthContext } from '../hooks/useAuthContext'
+import { useAuthContext } from '../../hooks/useAuthContext'
 import { useNavigate } from 'react-router-dom'
 
 interface Props{

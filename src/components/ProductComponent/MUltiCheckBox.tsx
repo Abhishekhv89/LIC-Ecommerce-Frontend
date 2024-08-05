@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box, Button, Center, Checkbox, CheckboxGroup, Stack, Text } from '@chakra-ui/react'
 // import { Stack } from 'react-bootstrap';
 // import "../CSS/style.css"
-import{Props} from '../interfaces/multiCheckInterface'
+import{Props} from '../../interfaces/multiCheckInterface'
 
 
 function MUltiCheckBox({onChange,list,title , selectedItems,onClear}:Props) {
@@ -17,13 +17,13 @@ function MUltiCheckBox({onChange,list,title , selectedItems,onClear}:Props) {
 
 
     return (
-       
+    
  <div className='brandsContainer'>
            <div className="checkboxHeader">
             <Text fontSize={'25px'} margin={'0px 0px 7px 9px'}>
           {title}:
           </Text>
-          <Button onClick={onClear} mt={2} marginRight={2}   colorScheme='teal' size='sm'>clear ALL</Button></div> 
+          <Button onClick={onClear} mt={2} marginRight={2}   colorScheme='teal' size='sm'>Clear All</Button></div> 
             <Box maxH="330px" overflowY="auto" >
            <Stack pl={6} mt={1} spacing={1}>
        

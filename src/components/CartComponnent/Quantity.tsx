@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useAuthContext } from '../hooks/useAuthContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
-import { CartItem } from '../interfaces/cartItemsInterface';
+// import { CartItem } from '../../interfaces/cartItemsInterface';
 import { Box, IconButton, Input, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
